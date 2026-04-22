@@ -1,0 +1,43 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:best-practices",
+    ":disableDependencyDashboard",
+    "github>aquaproj/aqua-renovate-config#2.12.0",
+    "github>aquaproj/aqua-renovate-config:file#2.12.0(aqua/.*\\.ya?ml)",
+    "github>aquaproj/aqua-renovate-config:installer-script#2.12.0(Dockerfile)"
+  ],
+  customManagers: [
+    {
+      customType: 'regex',
+      description: 'Update renovate container image versions in README.md',
+      datasourceTemplate: 'docker',
+      depNameTemplate: "renovate/renovate",
+      managerFilePatterns: [
+        '/^README\\.md$/',
+      ],
+      matchStrings: [
+        'renovate\\/renovate:(?<currentValue>\\d+(?:\\.\\d+(?:\\.\\d+)?)?\\S*)',
+      ],
+    },
+  ],
+  packageRules: [
+    {
+      description: "READMEはコマンド実行用なのでタグのみで一致させたい",
+      matchFileNames: ["README.md"],
+      matchPackageNames: [
+        'renovate/renovate',
+      ],
+      pinDigests: false,
+      schedule: ["* 1-4 * * 2"],
+    },
+    {
+      matchPackageNames: ["aquaproj/aqua-registry"],
+      schedule: ["* 1-4 * * 1"],
+    },
+  ],
+  prConcurrentLimit: 1,
+  prHourlyLimit: 1,
+  schedule: ["* 1-4 * * *"],
+  timezone: "Asia/Tokyo",
+}
