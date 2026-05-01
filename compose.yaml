@@ -3,3 +3,15 @@ services:
     build:
       context: create
       dockerfile: Dockerfile
+
+  create-dev:
+    build:
+      context: create
+      dockerfile: Dockerfile.dev
+    working_dir: /workspace/create
+    volumes:
+      - .:/workspace
+    command:
+      - /bin/bash
+      - -lc
+      - cmake -S . -B build -G Ninja && cmake --build build && ctest --test-dir build --output-on-failure
