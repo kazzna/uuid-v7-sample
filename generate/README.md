@@ -22,6 +22,14 @@ To build the image used for development and automated testing, execute the follo
 docker build --tag uuid-generate-dev:latest --file generate/tests/Dockerfile generate
 ```
 
+## Docker Compose Usage
+
+The simplest way to generate a UUID v7 is using Docker Compose from the root of the repository:
+
+```bash
+docker compose run --build --rm generate
+```
+
 ## Build Context Rationale
 
 The Dockerfiles are situated within their respective subdirectories (`src/` and `tests/`) to maintain a clean separation of concerns. However, as the build process requires access to the shared `CMakeLists.txt` located in the root of the `generate` directory, the build context must be set to `generate`.
