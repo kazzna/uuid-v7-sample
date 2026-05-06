@@ -33,3 +33,13 @@ docker compose run --build --rm generate
 ## Build Context Rationale
 
 The Dockerfiles are situated within their respective subdirectories (`src/` and `tests/`) to maintain a clean separation of concerns. However, as the build process requires access to the shared `CMakeLists.txt` located in the root of the `generate` directory, the build context must be set to `generate`.
+
+## Usage Options
+
+### Multiple Generation
+
+You can generate multiple UUIDs at once using the `--count` (or `-c`) option:
+
+```bash
+docker compose run --rm generate ./uuid_generate --count 5
+```
