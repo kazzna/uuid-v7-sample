@@ -12,7 +12,9 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    if (result->status == PARSE_SUCCESS) {
+    if (result->status == PARSE_VERSION) {
+        printf("uuid_generate version 1.0.0 (%s)\n", GIT_HASH);
+    } else if (result->status == PARSE_SUCCESS) {
         for (unsigned int i = 0; i < result->config->count; i++) {
             char uuid[37];
             uuid_v7_generate(uuid);

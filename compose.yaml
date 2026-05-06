@@ -1,13 +1,19 @@
 services:
   generate:
     build:
-      context: generate
-      dockerfile: src/Dockerfile
+      context: generate/src
+      dockerfile: Dockerfile
+      additional_contexts:
+        project_root: generate
+      args:
+        GIT_HASH: ${GIT_HASH:-unknown}
 
   generate-dev:
     build:
       context: generate
       dockerfile: tests/Dockerfile
+      args:
+        GIT_HASH: ${GIT_HASH:-unknown}
     working_dir: /workspace
     volumes:
       - type: bind
@@ -16,4 +22,4 @@ services:
     command:
       - /bin/bash
       - -lc
-      - cmake -S . -B build -G Ninja && cmake --build build && ctest --test-dir build --output-on-failure
+      - cmake -S . -B build -G Ninja -DGIT_HASH=${GIT_HASH:-unknown} && cmake --build build && ctest --test-dir build --output-on-failure
