@@ -29,3 +29,16 @@ add_uuid_test(test_parse_args_count_short_eq)
 add_executable(test_uuid_v7_format test_uuid_v7_format.c)
 target_link_libraries(test_uuid_v7_format PRIVATE uuid_v7_lib)
 add_test(NAME test_uuid_v7_format COMMAND test_uuid_v7_format)
+
+# UUID v7 タイムスタンプ妥当性確認テスト
+add_executable(test_uuid_v7_timestamp test_uuid_v7_timestamp.c)
+target_link_libraries(test_uuid_v7_timestamp PRIVATE uuid_v7_lib)
+# UUID v7 出力件数確認テスト
+add_executable(test_uuid_v7_count test_uuid_v7_count.c)
+add_test(NAME test_uuid_v7_count COMMAND test_uuid_v7_count)
+set_tests_properties(test_uuid_v7_count PROPERTIES WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/src")
+
+# UUID v7 時系列順確認テスト
+add_executable(test_uuid_v7_chronological_order test_uuid_v7_chronological_order.c)
+add_test(NAME test_uuid_v7_chronological_order COMMAND test_uuid_v7_chronological_order)
+set_tests_properties(test_uuid_v7_chronological_order PROPERTIES WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/src")
