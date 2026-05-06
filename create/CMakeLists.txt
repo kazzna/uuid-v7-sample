@@ -11,8 +11,11 @@ set(CMAKE_C_EXTENSIONS OFF)
 # コンパイラフラグ
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic -static")
 
-# 実行ファイル
-add_executable(main main.c)
+# テストを有効化
+include(CTest)
+enable_testing()
 
-# インストール設定
-install(TARGETS main DESTINATION bin)
+# 子ディレクトリの追加
+# src を先に読み込むことで、tests からライブラリが見えるようにするよ！
+add_subdirectory(src)
+add_subdirectory(tests)
