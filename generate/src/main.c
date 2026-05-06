@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "arg_parser.h"
+#include "uuid_v7.h"
 
 int main(int argc, char *argv[]) {
     ParseResult *result = parse_args(argc, argv);
@@ -11,13 +12,9 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    if (result->status == PARSE_HELP) {
-        /* TODO: display help */
-    } else if (result->status == PARSE_VERSION) {
-        /* TODO: display version */
-    } else {
-        /* TODO: generate and display UUIDs */
-    }
+    char uuid[37];
+    uuid_v7_generate(uuid);
+    printf("%s\n", uuid);
 
     free_parse_result(result);
     return EXIT_SUCCESS;

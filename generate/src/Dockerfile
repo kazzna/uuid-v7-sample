@@ -7,6 +7,8 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get install --assume-yes --no-install-recommends ninja-build && \
     apt-get install --assume-yes --no-install-recommends cmake && \
+    apt-get install --assume-yes --no-install-recommends uuid-dev && \
+    apt-get install --assume-yes --no-install-recommends pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
 # コンテキストからソースをコピー（src, tests, CMakeLists.txt 等が含まれる想定）
