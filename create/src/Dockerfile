@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install --assume-yes --no-install-recommends cmake && \
     rm -rf /var/lib/apt/lists/*
 
-# ソースコードをコピー
+# コンテキストからソースをコピー（src, tests, CMakeLists.txt 等が含まれる想定）
 COPY . .
 
 # ビルド
@@ -21,7 +21,8 @@ FROM alpine:3.22.4
 WORKDIR /app
 
 # 実行に必要なライブラリをコピー
-COPY --from=builder /app/build/main .
+# TODO: 後で CMakeLists.txt を修正したらバイナリ名が uuid_create に変わるかも
+COPY --from=builder /app/build/src/main .
 
 # デフォルトコマンド
 CMD ["./main"]
