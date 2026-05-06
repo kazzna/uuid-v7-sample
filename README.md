@@ -2,12 +2,12 @@
 
 Practice UUID v7
 
-## create
+## generate
 
 ### Build and Test in Docker
 
 Run the dev container with the default workflow, or pass a command to run instead:
 
 ```bash
-docker compose run --build --interactive --rm --service-ports --tty create-dev [COMMAND [ARG] ...]
+docker compose run --build --interactive --rm --service-ports --tty generate-dev [COMMAND [ARG] ...]
 ```

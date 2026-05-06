@@ -10,11 +10,11 @@ add_library(arg_parser_lib STATIC
 target_include_directories(arg_parser_lib PUBLIC .)
 
 # 実行ファイルの定義
-# 名前を main から uuid_create に変えて、より分かりやすく！
-add_executable(uuid_create main.c)
+# 名前を main から uuid_generate に変えて、より分かりやすく！
+add_executable(uuid_generate main.c)
 
 # 実行ファイルにライブラリをリンク
-target_link_libraries(uuid_create PRIVATE arg_parser_lib)
+target_link_libraries(uuid_generate PRIVATE arg_parser_lib)
 
 # インストール設定
-install(TARGETS uuid_create DESTINATION bin)
+install(TARGETS uuid_generate DESTINATION bin)

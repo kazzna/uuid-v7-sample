@@ -1,16 +1,18 @@
 services:
-  create:
+  generate:
     build:
-      context: create
+      context: generate
       dockerfile: src/Dockerfile
 
-  create-dev:
+  generate-dev:
     build:
-      context: create
+      context: generate
       dockerfile: tests/Dockerfile
     working_dir: /workspace
     volumes:
-      - ./create:/workspace
+      - type: bind
+        source: ./generate
+        target: /workspace
     command:
       - /bin/bash
       - -lc
