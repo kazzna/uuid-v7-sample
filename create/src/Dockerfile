@@ -1,5 +1,5 @@
 # Build stage
-FROM gcc:15.2.0-trixie AS builder
+FROM gcc:15.2.0-trixie@sha256:7c7782df5e7281b07fbd616c77310253a42c144068eefb71e202ad27c8be8488 AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ COPY . .
 RUN cmake -B build -G Ninja && cmake --build build
 
 # Runtime stage
-FROM alpine:3.22.4
+FROM alpine:3.22.4@sha256:310c62b5e7ca5b08167e4384c68db0fd2905dd9c7493756d356e893909057601
 
 WORKDIR /app
 
