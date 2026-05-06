@@ -11,11 +11,16 @@ RUN apt-get update && \
     apt-get install --assume-yes --no-install-recommends pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
-# コンテキストからソースをコピー（src, tests, CMakeLists.txt 等が含まれる想定）
-COPY . .
+# ビルド引数でGitハッシュを受け取る
+ARG GIT_HASH=unknown
 
-# ビルド
-RUN cmake -B build -G Ninja && cmake --build build
+# コンテキストからソースをコピー
+COPY . .
+COPY --from=project_root CMakeLists.txt ..
+COPY --from=project_root tests/ ../tests/
+
+# ビルド (Gitハッシュを明示的に渡す)
+RUN cmake -S .. -B build -G Ninja -DGIT_HASH=${GIT_HASH} && cmake --build build
 
 # Runtime stage
 FROM alpine:3.22.4@sha256:310c62b5e7ca5b08167e4384c68db0fd2905dd9c7493756d356e893909057601

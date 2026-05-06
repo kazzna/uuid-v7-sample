@@ -42,3 +42,7 @@ set_tests_properties(test_uuid_v7_count PROPERTIES WORKING_DIRECTORY "${CMAKE_BI
 add_executable(test_uuid_v7_chronological_order test_uuid_v7_chronological_order.c)
 add_test(NAME test_uuid_v7_chronological_order COMMAND test_uuid_v7_chronological_order)
 set_tests_properties(test_uuid_v7_chronological_order PROPERTIES WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/src")
+# バージョン表示テスト
+add_executable(test_version test_version.c)
+add_test(NAME test_version COMMAND test_version)
+set_tests_properties(test_version PROPERTIES WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/src")
