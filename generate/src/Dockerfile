@@ -1,5 +1,5 @@
 # Build stage
-FROM gcc:16.1.0-trixie@sha256:2f148fc02e5a5b33866533a03049e7b35c3560283fd502fed4e9402579fd0a06 AS builder
+FROM gcc:16.1.0-trixie@sha256:1cfa8769230debf43594ee1b48bc642f9bead8d479f9926bc61d3014bdf3ecc8 AS builder
 
 WORKDIR /app
 
