@@ -37,13 +37,13 @@ The simplest way to generate a UUID v7 with version metadata is using Docker Com
 
 ```bash
 # Set GIT_HASH environment variable and run
-GIT_HASH=$(git rev-parse --short HEAD) docker compose run --build --rm generate
+GIT_HASH=$(git rev-parse --short HEAD) docker compose --progress quiet run --build --rm generate
 ```
 
 To run tests with metadata:
 
 ```bash
-GIT_HASH=$(git rev-parse --short HEAD) docker compose run --build --rm generate-test
+GIT_HASH=$(git rev-parse --short HEAD) docker compose --progress quiet run --build --rm generate-test
 ```
 
 ## Build Context Rationale
@@ -57,7 +57,7 @@ The production Dockerfile (`src/Dockerfile`) uses `additional_contexts` (via `--
 You can generate multiple UUIDs at once using the `--count` (or `-c`) option:
 
 ```bash
-docker compose run --rm generate ./uuid_generate --count 5
+docker compose --progerss quiet run --rm generate --service-ports ./uuid_generate --count 5
 ```
 
 ### Versioning
@@ -65,7 +65,7 @@ docker compose run --rm generate ./uuid_generate --count 5
 The binary includes version metadata. You can check it with:
 
 ```bash
-docker compose run --rm generate ./uuid_generate --version
+docker compose --progerss quiet run --rm generate --service-ports ./uuid_generate --version
 ```
 
 Output format: `uuid_generate version 1.0.0 (hash)`
