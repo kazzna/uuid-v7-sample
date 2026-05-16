@@ -25,7 +25,7 @@ To build the image used for development and automated testing:
 
 ```bash
 docker build \
-  --tag uuid-generate-dev:latest \
+  --tag uuid-generate-test:latest \
   --file generate/tests/Dockerfile \
   --build-arg GIT_HASH=$(git rev-parse --short HEAD) \
   generate
@@ -43,7 +43,7 @@ GIT_HASH=$(git rev-parse --short HEAD) docker compose run --build --rm generate
 To run tests with metadata:
 
 ```bash
-GIT_HASH=$(git rev-parse --short HEAD) docker compose run --build --rm generate-dev
+GIT_HASH=$(git rev-parse --short HEAD) docker compose run --build --rm generate-test
 ```
 
 ## Build Context Rationale
@@ -69,3 +69,11 @@ docker compose run --rm generate ./uuid_generate --version
 ```
 
 Output format: `uuid_generate version 1.0.0 (hash)`
+
+## Help
+
+You can display the help message with:
+
+```bash
+docker compose run --rm generate ./uuid_generate --help
+```
